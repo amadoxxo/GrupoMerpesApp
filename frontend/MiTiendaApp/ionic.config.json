@@ -1,0 +1,7 @@
+{
+  "name": "MiTiendaApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Catálogo de Productos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Catálogo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Si no hay productos -->
+  @if (productos.length === 0) {
+    <div class="ion-text-center ion-padding">
+      <p>Productos no disponibles.</p>
+      <p><small>Por favor, inténtalo de nuevo más tarde.</small></p>
+    </div>
+  } @else {
+    <!-- Listado con bucle nativo (@for) -->
+    @for (producto of productos; track producto.id) {
+      <ion-card class="ion-margin-bottom">
+        <img [src]="producto.imagenUrl || 'https://via.placeholder.com/150'" alt="Imagen del producto" style="height: 180px; width: 100%; object-fit: cover;" />
+        <ion-card-header>
+          <ion-card-title>{{ producto.nombre }}</ion-card-title>
+          <ion-card-subtitle>{{ producto.precio | currency }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ producto.descripcion }}</p>
+          <ion-button expand="block" color="success" class="ion-margin-top" (click)="agregarAlCarrito(producto)">
+            Agregar al Carrito
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
+
+  <!-- Toast de Notificación -->
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="mensajeToast"
+    [duration]="2000"
+    (didDismiss)="isToastOpen = false">
+  </ion-toast>
+</ion-content>
