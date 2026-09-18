@@ -23,7 +23,10 @@
     <!-- Listado con bucle nativo (@for) -->
     @for (producto of productos; track producto.id) {
       <ion-card class="ion-margin-bottom">
-        <img [src]="producto.imagenUrl || 'https://via.placeholder.com/150'" alt="Imagen del producto" style="height: 180px; width: 100%; object-fit: cover;" />
+        <img
+          [src]="producto.imagenUrl || 'https://vinculamos.com.co/wp-content/themes/consultix/images/no-image-found-360x250.png'"
+          alt="Imagen del producto"
+          class="img-catalogo" />
         <ion-card-header>
           <ion-card-title>{{ producto.nombre }}</ion-card-title>
           <ion-card-subtitle>{{ producto.precio | currency }}</ion-card-subtitle>

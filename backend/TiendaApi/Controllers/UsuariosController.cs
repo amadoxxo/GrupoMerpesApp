@@ -45,11 +45,10 @@ namespace TiendaApi.Controllers
                 return Unauthorized(new { mensaje = "Credenciales incorrectas." });
             }
 
-            // Retornamos datos básicos del usuario para guardarlos en el cliente de Ionic
             return Ok(new { mensaje = "Login exitoso", usuario.Id, usuario.Nombre, usuario.Email });
         }
 
-        // POST: api/usuarios/ordenes (Simulación de compra)
+        // POST: api/usuarios/ordenes
         [HttpPost("ordenes")]
         public async Task<IActionResult> CrearOrden([FromBody] Orden orden)
         {
@@ -61,7 +60,6 @@ namespace TiendaApi.Controllers
         }
     }
 
-    // DTO auxiliar exclusivo para recibir las credenciales de login de forma limpia
     public class LoginDto
     {
         public string Email { get; set; } = string.Empty;

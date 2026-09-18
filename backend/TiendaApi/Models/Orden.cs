@@ -8,7 +8,6 @@ namespace TiendaApi.Models
         
         public int UsuarioId { get; set; }
         
-        // Propiedad de navegación (permite acceder a los datos del usuario desde la orden)
         [ForeignKey("UsuarioId")]
         public Usuario? Usuario { get; set; }
 

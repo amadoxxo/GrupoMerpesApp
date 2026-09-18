@@ -7,7 +7,6 @@ namespace TiendaApi.Models
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        // Propiedad de navegación inversa (opcional, para ver las órdenes de un usuario)
         public ICollection<Orden> Ordenes { get; set; } = new List<Orden>();
     }
 }

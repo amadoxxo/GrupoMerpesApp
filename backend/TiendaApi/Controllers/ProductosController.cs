@@ -23,7 +23,7 @@ namespace TiendaApi.Controllers
             return await _context.Productos.ToListAsync();
         }
 
-        // POST: api/productos (Útil para sembrar datos de prueba iniciales)
+        // POST: api/productos
         [HttpPost]
         public async Task<ActionResult<Producto>> PostProducto(Producto producto)
         {
