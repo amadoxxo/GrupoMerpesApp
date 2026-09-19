@@ -47,17 +47,6 @@ namespace TiendaApi.Controllers
 
             return Ok(new { mensaje = "Login exitoso", usuario.Id, usuario.Nombre, usuario.Email });
         }
-
-        // POST: api/usuarios/ordenes
-        [HttpPost("ordenes")]
-        public async Task<IActionResult> CrearOrden([FromBody] Orden orden)
-        {
-            orden.FechaOrden = DateTime.UtcNow;
-            _context.Ordenes.Add(orden);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { mensaje = "Compra simulada con éxito", ordenId = orden.Id });
-        }
     }
 
     public class LoginDto

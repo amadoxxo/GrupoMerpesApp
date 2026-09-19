@@ -31,6 +31,6 @@ export class ApiService {
 
   // 4. Enviar orden (Simulación de compra)
   crearOrden(orden: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/usuarios/ordenes`, orden);
+    return this.http.post(`${this.apiUrl}/ordenes`, orden);
   }
 }
