@@ -5,6 +5,7 @@ import {
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonToast
 } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { CarritoService } from '../services/carrito.service';
 
 @Component({
     selector: 'app-tab1',
@@ -18,8 +19,9 @@ import { ApiService } from '../services/api.service';
     ]
 })
 export class Tab1Page implements OnInit {
-    private apiService = inject(ApiService);
-    private cdr = inject(ChangeDetectorRef);
+    private apiService     = inject(ApiService);
+    private carritoService = inject(CarritoService);
+    private cdr            = inject(ChangeDetectorRef);
 
     productos: any[] = [];
     isToastOpen = false;
@@ -44,6 +46,7 @@ export class Tab1Page implements OnInit {
   }
 
   agregarAlCarrito(producto: any) {
+    this.carritoService.agregarProducto(producto);
     this.mostrarToast(`¡${producto.nombre} agregado al carrito!`);
   }
 

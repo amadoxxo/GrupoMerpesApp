@@ -1,17 +1,75 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab 2
+      Carrito de Compras
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Carrito</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  @if (carrito().length === 0) {
+    <div class="ion-text-center ion-padding" style="margin-top: 50px;">
+      <ion-icon name="cart-outline" style="font-size: 64px; color: #ccc;"></ion-icon>
+      <p>Tu carrito está vacío.</p>
+      <p><small>Agrega productos desde el Catálogo (Tab 1).</small></p>
+    </div>
+  } @else {
+    <ion-list>
+      @for (item of carrito(); track item.id) {
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [src]="item.imagenUrl || 'https://via.placeholder.com/150'" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ item.nombre }}</h2>
+            <p>{{ item.precio | currency }} x {{ item.cantidad }}</p>
+            <p><strong>Subtotal:</strong> {{ item.precio * item.cantidad | currency }}</p>
+          </ion-label>
+          <ion-note slot="end" class="ion-no-margin">
+            <div style="display: flex; align-items: center; gap: 5px;">
+              <ion-button size="small" color="medium" (click)="disminuirCantidad(item.id)">-</ion-button>
+              <span>{{ item.cantidad }}</span>
+              <ion-button size="small" color="medium" (click)="aumentarCantidad(item)">+</ion-button>
+            </div>
+          </ion-note>
+        </ion-item>
+      }
+    </ion-list>
+
+    <!-- Resumen y Total -->
+    <div class="ion-padding" style="margin-top: 20px;">
+      <h3>Total a Pagar: <strong>{{ total() | currency }}</strong></h3>
+
+      <!-- Advertencia si no está logueado -->
+      @if (!usuarioLogueado) {
+        <ion-item color="warning" class="ion-margin-bottom" lines="none" style="border-radius: 8px;">
+          <ion-label class="ion-text-wrap">
+            <p>🔒 Debes iniciar sesión en la pestaña <strong>Cuenta</strong> para poder finalizar tu compra.</p>
+          </ion-label>
+        </ion-item>
+      }
+
+      <!-- Botón condicional de compra -->
+      <ion-button
+        expand="block"
+        [color]="usuarioLogueado ? 'success' : 'medium'"
+        class="ion-margin-top"
+        (click)="finalizarOrdenReal()">
+        {{ usuarioLogueado ? 'Finalizar Compra y Pagar' : 'Inicia sesión para comprar' }}
+      </ion-button>
+    </div>
+  }
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="mensajeToast"
+    [duration]="3000"
+    (didDismiss)="isToastOpen = false">
+  </ion-toast>
 </ion-content>

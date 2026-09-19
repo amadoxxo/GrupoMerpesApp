@@ -1,17 +1,60 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Mi Cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Cuenta</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- SIN paréntesis -->
+  @if (!usuarioLogueado) {
+    <ion-card class="ion-padding">
+      <h2 class="ion-text-center">{{ isLoginMode ? 'Iniciar Sesión' : 'Crear Cuenta' }}</h2>
+
+      @if (!isLoginMode) {
+        <ion-item>
+          <ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="nombre" placeholder="Tu nombre"></ion-input>
+        </ion-item>
+      }
+
+      <ion-item>
+        <ion-input label="Correo Electrónico" labelPlacement="stacked" [(ngModel)]="email" type="email" placeholder="correo@example.com"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Contraseña" labelPlacement="stacked" [(ngModel)]="password" type="password" placeholder="********"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" class="ion-margin-top" (click)="submitAuth()">
+        {{ isLoginMode ? 'Ingresar' : 'Registrarse' }}
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" color="medium" (click)="cambiarModo()">
+        {{ isLoginMode ? '¿No tienes cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia sesión' }}
+      </ion-button>
+    </ion-card>
+  } @else {
+    <ion-card class="ion-padding ion-text-center">
+      <ion-icon name="person-circle-outline" style="font-size: 64px; color: var(--ion-color-primary);"></ion-icon>
+
+      <h2>¡Bienvenido, {{ usuarioLogueado.nombre || usuarioLogueado.email }}!</h2>
+      <p>Has iniciado sesión correctamente. Ya puedes ir al Carrito (Tab 2) para finalizar tu compra.</p>
+
+      <ion-button expand="block" color="danger" fill="outline" class="ion-margin-top" (click)="cerrarSesion()">
+        Cerrar Sesión
+      </ion-button>
+    </ion-card>
+  }
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="mensajeToast"
+    [duration]="2500"
+    (didDismiss)="isToastOpen = false">
+  </ion-toast>
 </ion-content>
