@@ -1,4 +1,4 @@
-namespace TiendaApi.DTOs // Reemplaza con el namespace real de tu proyecto
+namespace TiendaApi.DTOs
 {
     public class CrearOrdenDto
     {

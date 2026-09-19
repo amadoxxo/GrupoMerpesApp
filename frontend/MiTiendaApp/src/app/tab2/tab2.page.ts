@@ -43,7 +43,7 @@ export class Tab2Page {
     // Validación estricta por si el usuario de alguna forma intenta comprar sin sesión
     const usuario = this.usuarioLogueado;
     if (!usuario) {
-      this.mostrarToast('⚠️ Debes iniciar sesión en la pestaña "Cuenta" (Tab 3) antes de finalizar la compra.');
+      this.mostrarToast('Debes iniciar sesión en la pestaña "Cuenta" antes de finalizar la compra.');
       return;
     }
 
@@ -57,12 +57,12 @@ export class Tab2Page {
 
     this.apiService.crearOrden(ordenPayload).subscribe({
       next: (res) => {
-        this.mostrarToast('¡Orden creada y guardada en PostgreSQL con éxito!');
+        this.mostrarToast('¡Orden creada con éxito!');
         this.carritoService.vaciarCarrito();
       },
       error: (err) => {
         console.error(err);
-        this.mostrarToast('Error al procesar la orden en el servidor.');
+        this.mostrarToast('Error al procesar la orden.');
       }
     });
   }

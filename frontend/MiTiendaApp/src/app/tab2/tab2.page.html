@@ -17,14 +17,14 @@
     <div class="ion-text-center ion-padding" style="margin-top: 50px;">
       <ion-icon name="cart-outline" style="font-size: 64px; color: #ccc;"></ion-icon>
       <p>Tu carrito está vacío.</p>
-      <p><small>Agrega productos desde el Catálogo (Tab 1).</small></p>
+      <p><small>Agrega productos desde productos.</small></p>
     </div>
   } @else {
     <ion-list>
       @for (item of carrito(); track item.id) {
         <ion-item>
           <ion-thumbnail slot="start">
-            <img [src]="item.imagenUrl || 'https://via.placeholder.com/150'" />
+            <img [src]="item.imagenUrl" />
           </ion-thumbnail>
           <ion-label>
             <h2>{{ item.nombre }}</h2>
@@ -50,7 +50,7 @@
       @if (!usuarioLogueado) {
         <ion-item color="warning" class="ion-margin-bottom" lines="none" style="border-radius: 8px;">
           <ion-label class="ion-text-wrap">
-            <p>🔒 Debes iniciar sesión en la pestaña <strong>Cuenta</strong> para poder finalizar tu compra.</p>
+            <p>Debes iniciar sesión en la pestaña <strong>Cuenta</strong> para poder finalizar tu compra.</p>
           </ion-label>
         </ion-item>
       }

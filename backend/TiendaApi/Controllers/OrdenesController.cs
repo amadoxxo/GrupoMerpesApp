@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TiendaApi.Data; // Ajusta según el namespace de tu DbContext
+using TiendaApi.Data;
 using TiendaApi.Models;
-using TiendaApi.DTOs; // Donde tengas tu CrearOrdenDto
+using TiendaApi.DTOs;
 using System.Text.Json;
 
 namespace TiendaApi.Controllers
@@ -11,7 +10,7 @@ namespace TiendaApi.Controllers
     [ApiController]
     public class OrdenesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context; // Cambia ApplicationDbContext por el nombre real de tu DbContext si es diferente
+        private readonly ApplicationDbContext _context;
 
         public OrdenesController(ApplicationDbContext context)
         {
@@ -29,10 +28,9 @@ namespace TiendaApi.Controllers
             decimal totalCalculado = 0;
             var listaDetallesResumen = new List<object>();
 
-            // Iteramos sobre los productos que envía Ionic
+
             foreach (var item in dto.Productos)
             {
-                // Buscamos el producto en la base de datos para obtener su precio real y su nombre
                 var productoDb = await _context.Productos.FindAsync(item.ProductoId);
 
                 if (productoDb != null)
@@ -40,7 +38,6 @@ namespace TiendaApi.Controllers
                     var subtotal = productoDb.Precio * item.Cantidad;
                     totalCalculado += subtotal;
 
-                    // Guardamos una estructura limpia para el detalle
                     listaDetallesResumen.Add(new
                     {
                         productoId = productoDb.Id,
@@ -51,10 +48,8 @@ namespace TiendaApi.Controllers
                 }
             }
 
-            // Convertimos la lista de productos a un string (JSON) para guardarlo en la columna DetalleProductos
             string detalleJson = JsonSerializer.Serialize(listaDetallesResumen);
 
-            // Creamos la nueva orden con el total real y el detalle completo
             var nuevaOrden = new Orden
             {
                 UsuarioId = dto.UsuarioId,

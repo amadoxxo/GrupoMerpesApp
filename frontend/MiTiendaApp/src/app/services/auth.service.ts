@@ -4,7 +4,6 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  // Signal para almacenar el usuario actual logueado (null si no hay sesión)
   usuarioLogueado = signal<any>(null);
 
   setUsuario(usuario: any) {

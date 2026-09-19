@@ -11,7 +11,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- SIN paréntesis -->
   @if (!usuarioLogueado) {
     <ion-card class="ion-padding">
       <h2 class="ion-text-center">{{ isLoginMode ? 'Iniciar Sesión' : 'Crear Cuenta' }}</h2>
@@ -42,8 +41,8 @@
     <ion-card class="ion-padding ion-text-center">
       <ion-icon name="person-circle-outline" style="font-size: 64px; color: var(--ion-color-primary);"></ion-icon>
 
-      <h2>¡Bienvenido, {{ usuarioLogueado.nombre || usuarioLogueado.email }}!</h2>
-      <p>Has iniciado sesión correctamente. Ya puedes ir al Carrito (Tab 2) para finalizar tu compra.</p>
+      <h2>¡Bienvenid@ {{ usuarioLogueado.nombre || usuarioLogueado.email }}!</h2>
+      <p>Has iniciado sesión correctamente. Ya puedes ir al Carrito para finalizar tu compra.</p>
 
       <ion-button expand="block" color="danger" fill="outline" class="ion-margin-top" (click)="cerrarSesion()">
         Cerrar Sesión
