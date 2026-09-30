@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TiendaApi.DTOs;
 using TiendaApi.Data;
 using TiendaApi.Models;
 
@@ -47,11 +48,5 @@ namespace TiendaApi.Controllers
 
             return Ok(new { mensaje = "Login exitoso", usuario.Id, usuario.Nombre, usuario.Email });
         }
-    }
-
-    public class LoginDto
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }

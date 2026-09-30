@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-title>
       Catálogo de Productos
@@ -6,7 +6,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content
+  [fullscreen]="true"
+  class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Catálogo</ion-title>
@@ -33,7 +35,11 @@
         </ion-card-header>
         <ion-card-content>
           <p>{{ producto.descripcion }}</p>
-          <ion-button expand="block" color="success" class="ion-margin-top" (click)="agregarAlCarrito(producto)">
+          <ion-button
+            expand="block"
+            color="success"
+            class="ion-margin-top"
+            (click)="agregarAlCarrito(producto)">
             Agregar al Carrito
           </ion-button>
         </ion-card-content>
